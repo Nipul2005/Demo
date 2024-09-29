@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-zinc-900">
+    <div class="w-screen h-full bg-zinc-900 p-10 text-[#fffaff]">
+        <a href="/" class="text-blue-400 text-[0.9em] mb-5 inline-block">Home</a>
+        <h2 class="text-white text-2xl mb-6">All User</h2>
+        
+        <div class="users flex gap-5 w-full  flex-wrap justify-start align-center" id="show">
+            
+            <% if(all.length >0){%>
+                <%
+                all.reverse().forEach((val, id)=>{%>
+                    <div class=" w-60 bg-zinc-800 p-4  rounded-lg" >
+                        <div class="img w-full h-52 bg-zinc-500 rounded-lg overflow-hidden">
+                            <img src="<%= val.image %>" alt="img" srcset="" class="w-full h-full object-cover position-center rounded-lg" loading="lazy">
+                        </div>
+                        <h2 class="text-white text-2xl mt-2"><%= val.name %></h2>
+                        <h3 class="text-blue-300 text-[0.9em] mt-2"><%= val.email %></h3>
+        
+                        <div class="action w-full flex align-center justify-between mt-5">
+                            <p class="text-green-400 text-[0.9em] cursor-pointer edit_user">Edit User</p>
+                            <a href="/delete/<%=val._id%>" class="text-red-400 text-[0.9em] cursor-pointer">Delete user</a>
+                        </div>
+                    </div>
+                <%})
+            %>
+            <%}else{%>
+                <h3 class="text-zinc-600 text-2xl ">No user founded</h3>
+                <%}
+                
+            %>
+        </div>
+
+           
+
+        <div class="w-60  bg-zinc-800 absolute top-[30%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-3 rounded-lg flex justify-center align-start flex-col gap-2 hidden" id="popup">
+            <form action="/create" method="post" class="flex justify-center align-center" >
+                <!-- dynamic html insertion -->
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const data= <%- JSON.stringify(all) %>
+    </script>
+
+    <script src="/javascript/script.js"></script>
+</body>
+</html>
